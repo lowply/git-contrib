@@ -22,5 +22,5 @@ GIT_DIR=git.git GIT_WORK_TREE=. git checkout ${TAG} -- contrib || exit $?
 git add contrib
 git commit -m "Import ${TAG}"
 git push
-git tag -a "${TAG}" -m "Mirror of the contrib directory of Git ${TAG}"
+git tag -a "${TAG}" -m "Mirror of https://github.com/git/git/tree/${TAG}/contrib"
 git push origin --tags
