@@ -1,0 +1,20 @@
+name: Catch up with git/git
+on:
+  workflow_dispatch:
+  schedule:
+    # Runs at 18:50 JST every day
+    - cron: "50 9 * * *"
+jobs:
+  main:
+    name: Main job
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GH_TOKEN }}
+      - name: Update
+        id: update
+        run: ./script/update.sh
