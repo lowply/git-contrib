@@ -34,6 +34,10 @@ echo "Current version: ${CURRENT_VERSION}"
 echo "Fetching tags from git.git"
 GIT_DIR=git.git git fetch --tags
 
+echo "Configuring git"
+git config --global user.name "Sho Mizutani"
+git config --global user.email "lowply@github.com"
+
 GIT_DIR=git.git git tag -l | grep "^v2.*" | grep -v "\-rc.*$" | sort -V | while IFS='' read -r TAG; do
     if version_gt "${TAG}" "${CURRENT_VERSION}"; then
         echo "Processing tag: ${TAG}"
