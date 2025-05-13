@@ -19,7 +19,7 @@ TAG=${1}
 [ -d contrib ] && rm -rf contrib
 
 echo "Fetching tags from git.git"
-GIT_DIR=git.git GIT_WORK_TREE=git.git git fetch --tags
+GIT_DIR=git.git git fetch --tags
 
 echo "Checking out the contrib dir from git.git ${TAG}"
 GIT_DIR=git.git GIT_WORK_TREE=. git checkout ${TAG} -- contrib || exit $?
