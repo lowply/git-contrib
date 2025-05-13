@@ -18,9 +18,6 @@ TAG=${1}
 [ -d git.git ] || git clone --bare https://github.com/git/git.git
 [ -d contrib ] && rm -rf contrib
 
-echo "Fetching tags from git.git"
-GIT_DIR=git.git git fetch --tags
-
 echo "Checking out the contrib dir from git.git ${TAG}"
 GIT_DIR=git.git GIT_WORK_TREE=. git checkout ${TAG} -- contrib || exit $?
 
