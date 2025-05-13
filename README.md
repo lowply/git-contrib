@@ -5,10 +5,10 @@ This repository is a mirror of the contrib directory of [git/git](https://github
 To sync from git/git:
 
 ```
-./script/sync.sh "v2.39.0"
+./script/sync.sh v2.39.0
 ```
 
-To list git/git versions: 
+To list git/git versions:
 
 ```
 GIT_DIR=git.git git fetch --tags
