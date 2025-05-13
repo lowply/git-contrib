@@ -26,6 +26,8 @@ version_gt() {
     return 1
 }
 
+[ -d git.git ] || git clone --bare https://github.com/git/git.git
+
 CURRENT_VERSION=$(git tag -l | tail -n 1)
 echo "Current version: ${CURRENT_VERSION}"
 
