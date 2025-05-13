@@ -8,13 +8,11 @@ jobs:
   main:
     name: Main job
     runs-on: ubuntu-latest
-    env:
-      GH_TOKEN: ${{ github.token }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          token: ${{ secrets.GH_TOKEN }}
+          token: ${{ secrets.GIT_CONTRIB_PAT }}
       - name: Update
         id: update
         run: ./script/update.sh
