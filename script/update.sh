@@ -28,8 +28,9 @@ version_gt() {
 
 [ -d git.git ] || git clone --bare https://github.com/git/git.git
 
-CURRENT_VERSION=$(git tag -l | tail -n 1)
-echo "Current version: ${CURRENT_VERSION}"
+CURRENT=$(git tag -l | tail -n 1)
+[ -z "${CURRENT}" ] && { echo "No current tag"; exit 1; }
+echo "Current version: ${CURRENT}"
 
 echo "Fetching tags from git.git"
 GIT_DIR=git.git git fetch --tags
@@ -39,7 +40,7 @@ git config --global user.name "Sho Mizutani"
 git config --global user.email "lowply@github.com"
 
 GIT_DIR=git.git git tag -l | grep "^v2.*" | grep -v "\-rc.*$" | sort -V | while IFS='' read -r TAG; do
-    if version_gt "${TAG}" "${CURRENT_VERSION}"; then
+    if version_gt "${TAG}" "${CURRENT}"; then
         echo "Processing tag: ${TAG}"
         ./script/sync.sh "${TAG}"
         break
