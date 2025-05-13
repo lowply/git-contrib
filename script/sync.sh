@@ -21,9 +21,18 @@ TAG=${1}
 echo "Checking out the contrib dir from git.git ${TAG}"
 GIT_DIR=git.git GIT_WORK_TREE=. git checkout ${TAG} -- contrib || exit $?
 
+CURRENT=$(git tag --sort=-v:refname | head -n 1)
+
 echo "Add, commit, push, tag and push the tag to the repository"
-git add contrib
-git commit -m "Import ${TAG}"
-git push
-git tag -a "${TAG}" -m "Mirror of https://github.com/git/git/tree/${TAG}/contrib"
+if git diff --quiet contrib; then
+    echo "No changes in contrib dir"
+    SHA=$(git rev-list -n 1 ${CURRENT})
+else
+    git add contrib
+    git commit -m "Import ${TAG}"
+    git push
+    # SHA is empty
+fi
+
+git tag -a ${TAG} ${SHA} -m "Mirror of https://github.com/git/git/tree/${TAG}/contrib"
 git push origin --tags
